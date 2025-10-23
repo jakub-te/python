@@ -3,18 +3,22 @@
 num1=input("prvni cislo: ")
 oprt=input("operace: ")
 num2=input("druhe cislo: ")
-
+ 
 # TVUJ KOD:
-if oprt=="+":
-    print(int(num1) + int(num2))
-elif oprt=="-":
-    print(int(num1) - int(num2))
-elif oprt=="*":
-    print(int(num1) * int(num2))
-elif oprt=="/":
-    if int(num2)==0:
-        print("Jsi hloupý 0 nelze dělit!!!")
+if  num1.isnumeric() or num2.isnumeric():
+
+    if oprt=="+":
+        print(int(num1) + int(num2))
+    elif oprt=="-":
+        print(int(num1) - int(num2))
+    elif oprt=="*":
+        print(int(num1) * int(num2))
+    elif oprt=="/":
+        if int(num2)==0:
+            print("Jsi hloupý 0 nelze dělit!!!")
+        else:
+            print(int(num1) / int(num2))
     else:
-        print(int(num1) / int(num2))
+        print("Tato operace neexistuje!!")
 else:
-    print("Tato operace neexistuje!!")
+    print("Toto je kalkulačka, písmena bys zadávat neměl!")
