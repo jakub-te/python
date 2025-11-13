@@ -14,10 +14,14 @@ while loop == 1:
 
         if num1=="π" or num1=="pi":
             num1=3.1415926535
+        elif num1=="e":
+            num1=2.71828    
         else:
             num1=float(num1)
         if num2=="π" or num2=="pi":
             num2=3.1415926535
+        elif num2=="e":
+            num2=2.71828
         else:
             num2=float(num2)
 
