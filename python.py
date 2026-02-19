@@ -14,13 +14,17 @@ enterclear=False
 label = tk.Label(root, textvariable=text,width=30,height=4).grid(row=0,column=0,columnspan=10)
 
 def clicked(thing):
+    global enterclear
     if enterclear:
         text.set("")
+        enterclear=False
     text.set(text.get()+str(thing))
 
 def clear():
     text.set("")
+
 def enter():
+    global enterclear
     try:
         text.set(eval(text.get()))
     except:
