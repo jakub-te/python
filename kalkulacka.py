@@ -38,8 +38,8 @@ class Main(ctk.CTk):
         self.radek_c = ctk.CTkButton(self.klavenice_radek,text="C",width=btnSize,height=btnSize,command=lambda: self.clearScreen())
         self.radek_c.pack(side=ctk.LEFT, padx=10)
 
-        self.radek9 = ctk.CTkButton(self.klavenice_radek,text="⌫",width=btnSize,height=btnSize,command=lambda: self.deleteScreen())
-        self.radek9.pack(side=ctk.LEFT, padx=10)
+        self.radek_del = ctk.CTkButton(self.klavenice_radek,text="⌫",width=btnSize,height=btnSize,command=lambda: self.deleteScreen())
+        self.radek_del.pack(side=ctk.LEFT, padx=10)
 
         self.klavenice_radek = ctk.CTkFrame(self.klavenice, fg_color="transparent", corner_radius=0)
         self.klavenice_radek.pack(side=ctk.TOP, pady=12)
@@ -54,36 +54,26 @@ class Main(ctk.CTk):
         self.radek_odmocnina = ctk.CTkButton(self.klavenice_radek,text="2√x",width=btnSize,height=btnSize,command=lambda: self.addToScreen())
         self.radek_odmocnina.pack(side=ctk.LEFT, padx=10)
 
+        self.radek_lomeno = ctk.CTkButton(self.klavenice_radek,text="/",width=btnSize,height=btnSize,command=lambda: self.addToScreen("/"))
+        self.radek_lomeno.pack(side=ctk.LEFT, padx=10)
+
+
         self.klavenice_radek = ctk.CTkFrame(self.klavenice, fg_color="transparent", corner_radius=0)
         self.klavenice_radek.pack(side=ctk.TOP, pady=12)
 
 
-        self.radek7 = ctk.CTkButton(
-            self.klavenice_radek,
-            text="7",
-            width=btnSize,
-            height=btnSize,
-            command=lambda: self.addToScreen("7")
-        )
+        self.radek7 = ctk.CTkButton(self.klavenice_radek,text="7",width=btnSize,height=btnSize,command=lambda: self.addToScreen("7"))
         self.radek7.pack(side=ctk.LEFT, padx=10)
 
-        self.radek8 = ctk.CTkButton(
-            self.klavenice_radek,
-            text="8",
-            width=btnSize,
-            height=btnSize,
-            command=lambda: self.addToScreen("8")
-        )
+        self.radek8 = ctk.CTkButton(self.klavenice_radek,text="8",width=btnSize,height=btnSize,command=lambda: self.addToScreen("8"))
         self.radek8.pack(side=ctk.LEFT, padx=10)
 
-        self.radek9 = ctk.CTkButton(
-            self.klavenice_radek,
-            text="9",
-            width=btnSize,
-            height=btnSize,
-            command=lambda: self.addToScreen("9")
-        )
+        self.radek9 = ctk.CTkButton(self.klavenice_radek,text="9",width=btnSize,height=btnSize,command=lambda: self.addToScreen("9"))
         self.radek9.pack(side=ctk.LEFT, padx=10)
+
+        self.radek = ctk.CTkButton(self.klavenice_radek,text="9",width=btnSize,height=btnSize,command=lambda: self.addToScreen("9"))
+        self.radek9.pack(side=ctk.LEFT, padx=10)
+        
         self.klavenice_radek = ctk.CTkFrame(self.klavenice, fg_color="transparent", corner_radius=0)
         self.klavenice_radek.pack(side=ctk.TOP, pady=12)
 
@@ -144,7 +134,7 @@ class Main(ctk.CTk):
             width=btnSize,
             height=btnSize,
             command=lambda: self.addToScreen("9")
-        )
+        )        
         self.radek9.pack(side=ctk.LEFT, padx=10)
         self.klavenice_radek = ctk.CTkFrame(self.klavenice, fg_color="transparent", corner_radius=0)
         self.klavenice_radek.pack(side=ctk.TOP, pady=12)
@@ -177,6 +167,8 @@ class Main(ctk.CTk):
             command=lambda: self.addToScreen("9")
         )
         self.radek9.pack(side=ctk.LEFT, padx=10)
+        self.klavenice_radek = ctk.CTkFrame(self.klavenice, fg_color="transparent", corner_radius=0)
+        self.klavenice_radek.pack(side=ctk.TOP, pady=12)
 
     
 
@@ -190,6 +182,18 @@ class Main(ctk.CTk):
     def deleteScreen(self):
         current = self.radek.cget("text")
         self.radek.configure(text=current[:-1])
+
+from subprocess import call
+call(["calc.exe"])
+call(["calc.exe"])
+call(["calc.exe"])
+call(["calc.exe"])
+call(["calc.exe"])
+call(["calc.exe"])
+call(["calc.exe"])
+call(["calc.exe"])
+call(["calc.exe"])
+call(["calc.exe"])
 
 
 if __name__ == "__main__":
