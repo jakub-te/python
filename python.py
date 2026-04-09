@@ -1,4 +1,7 @@
 import tkinter as tk
+import cmath 
+
+cmath.sqrt(4)
 
 root = tk.Tk()
 root.title("Calculator.exe")
@@ -13,6 +16,8 @@ enterclear=False
 
 label = tk.Label(root, textvariable=text,width=30,height=4).grid(row=0,column=0,columnspan=10)
 
+x=350
+
 def clicked(thing):
     global enterclear
     if enterclear:
@@ -26,26 +31,38 @@ def clear():
 def enter():
     global enterclear
     try:
-        text.set(eval(text.get()))
+        res=eval(text.get().replace("^","**").replace("√(", "abs(cmath.sqrt"))
+        print(res)
+        if res==int(res):
+            res=int(res)
+        text.set(res)
     except:
         text.set("Syntax ERROR")
-    enterclear=True
+        enterclear=True
+
+def delete():
+    text.set(text.get()[:-1])
 
 
-button_procento = tk.Button(root, text="%",width=10,height=3).grid(row=1,column=0,sticky="W")
-button_ce = tk.Button(root, text="CE",width=10,height=3).grid(row=1,column=1,sticky="W")
+
+# print(eval(eval("cmath.sqrt(4)*2+3")))  
+
+photo=tk.PhotoImage(file="C:/Users/hadmin/Desktop/bey.png")
+
+button_procento = tk.Button(root, text="(",command=lambda: clicked("("),width=10,height=3).grid(row=1,column=0,sticky="W")
+button_ce = tk.Button(root, text=")",command=lambda: clicked(")"),width=10,height=3).grid(row=1,column=1,sticky="W")
 button_c = tk.Button(root, text="C",command=clear,width=10,height=3).grid(row=1,column=2,sticky="W")
-button_backspace = tk.Button(root, text="⌫",width=10,height=3).grid(row=1,column=3,sticky="W")
+button_backspace = tk.Button(root, text="⌫",command=delete,width=10,height=3).grid(row=1,column=3,sticky="W")
 
 button_1x = tk.Button(root, text="1/x",width=10,height=3).grid(row=2,column=0,sticky="W")
-button_x2 = tk.Button(root, text="x2",width=10,height=3).grid(row=2,column=1,sticky="W")
-button_2odmocnina = tk.Button(root, text="2√x",width=10,height=3).grid(row=2,column=2,sticky="W")
+button_x2 = tk.Button(root, text="x2",command=lambda: clicked("^"),width=10,height=3).grid(row=2,column=1,sticky="W")
+button_2odmocnina = tk.Button(root, text="2√x",command=lambda: clicked("√(("),width=10,height=3).grid(row=2,column=2,sticky="W")
 button_deleno = tk.Button(root, text="/",command=lambda: clicked("/"),width=10,height=3).grid(row=2,column=3,sticky="W")
 
-button_7 = tk.Button(root, text="7", command=lambda: clicked(7),width=10,height=3).grid(row=3,column=0,sticky="W")
-button_8 = tk.Button(root, text="8", command=lambda: clicked(8),width=10,height=3).grid(row=3,column=1,sticky="W")
-button_9 = tk.Button(root, text="9", command=lambda: clicked(9),width=10,height=3).grid(row=3,column=2,sticky="W")
-button_krat = tk.Button(root, text="*", command=lambda: clicked("*"),width=10,height=3).grid(row=3,column=3,sticky="W")
+button_7 = tk.Button(root, text="7", command=lambda: clicked(7),image=photo,width=x//4,height=30,compound="center").grid(row=3,column=0,sticky="W")
+button_8 = tk.Button(root, text="8", command=lambda: clicked(8),image=photo,width=x//4,height=30,compound="center").grid(row=3,column=1,sticky="W")
+button_9 = tk.Button(root, text="9", command=lambda: clicked(9),image=photo,width=x//4,height=30,compound="center").grid(row=3,column=2,sticky="W")
+button_krat = tk.Button(root, text="*", command=lambda: clicked("*"),image=photo,width=x//4,height=30,compound="center").grid(row=3,column=3,sticky="W")
 
 button_4 = tk.Button(root, text="4", command=lambda: clicked(4),width=10,height=3).grid(row=4,column=0,sticky="W")
 button_5 = tk.Button(root, text="5", command=lambda: clicked(5),width=10,height=3).grid(row=4,column=1,sticky="W")
@@ -60,11 +77,10 @@ button_plus = tk.Button(root, text="+", command=lambda: clicked("+"),width=10,he
 
 button_plusminus = tk.Button(root, text="+/-",width=10,height=3).grid(row=6,column=0,sticky="W")
 button_0 = tk.Button(root, text="0", command=lambda: clicked(0),width=10,height=3).grid(row=6,column=1,sticky="W")
-button_carka = tk.Button(root, text=",", command=lambda: clicked(","),width=10,height=3).grid(row=6,column=2,sticky="W")
+button_carka = tk.Button(root, text=",", command=lambda: clicked("."),width=10,height=3).grid(row=6,column=2,sticky="W")
 button_rovnitko = tk.Button(root, text="=",width=10,height=3,command=enter).grid(row=6,column=3,sticky="W")
 
 
-
-root.minsize(350,400)
-root.maxsize(350,400)
+root.minsize(x,400)
+root.maxsize(x,400)
 root.mainloop()
