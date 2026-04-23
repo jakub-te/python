@@ -1,12 +1,16 @@
 import customtkinter as ctk
+import cmath
 
 class Main(ctk.CTk):
+    enterclear=False
     def __init__(self):
 
         super().__init__()
 
         self.title("kalkulacka")
-        self.geometry("300x500")
+        self.geometry("350x550")
+        self.minsize(350,550)
+        self.maxsize(350,550)
 
         self.generate_layout()
         self.generate_rows()
@@ -23,12 +27,13 @@ class Main(ctk.CTk):
         self.radek = ctk.CTkLabel(self.obrazovka, text="", font=("Roboto", 24))
         self.radek.pack(side=ctk.RIGHT, padx=12)
 
+
     def generate_buttons(self):
         self.klavenice_radek = ctk.CTkFrame(self.klavenice, fg_color="transparent", corner_radius=0)
         self.klavenice_radek.pack(side=ctk.TOP, pady=12)
 
         btnSize = 50
-
+        # prvni radek
         self.radek_open = ctk.CTkButton(self.klavenice_radek,text="(",width=btnSize,height=btnSize,command=lambda: self.addToScreen("("))
         self.radek_open.pack(side=ctk.LEFT, padx=10)
 
@@ -45,13 +50,13 @@ class Main(ctk.CTk):
         self.klavenice_radek.pack(side=ctk.TOP, pady=12)
 
 
-        self.radek_1lomenox = ctk.CTkButton(self.klavenice_radek,text="1/x",width=btnSize,height=btnSize,command=lambda: self.addToScreen(""))
+        self.radek_1lomenox = ctk.CTkButton(self.klavenice_radek,text="1/x",width=btnSize,height=btnSize,command=lambda: self.addToScreen("1/("))
         self.radek_1lomenox.pack(side=ctk.LEFT, padx=10)
 
-        self.radek_x2 = ctk.CTkButton(self.klavenice_radek,text="x2",width=btnSize,height=btnSize,command=lambda: self.addToScreen(""))
+        self.radek_x2 = ctk.CTkButton(self.klavenice_radek,text="^x",width=btnSize,height=btnSize,command=lambda: self.addToScreen("^"))
         self.radek_x2.pack(side=ctk.LEFT, padx=10)
 
-        self.radek_odmocnina = ctk.CTkButton(self.klavenice_radek,text="2√x",width=btnSize,height=btnSize,command=lambda: self.addToScreen(""))
+        self.radek_odmocnina = ctk.CTkButton(self.klavenice_radek,text="2√x",width=btnSize,height=btnSize,command=lambda: self.addToScreen("√(("))
         self.radek_odmocnina.pack(side=ctk.LEFT, padx=10)
 
         self.radek_lomeno = ctk.CTkButton(self.klavenice_radek,text="/",width=btnSize,height=btnSize,command=lambda: self.addToScreen("/"))
@@ -110,39 +115,28 @@ class Main(ctk.CTk):
         self.klavenice_radek.pack(side=ctk.TOP, pady=12)
 
 
-        self.radek7 = ctk.CTkButton(
-            self.klavenice_radek,
-            text="7",
-            width=btnSize,
-            height=btnSize,
-            command=lambda: self.addToScreen("7")
-        )
-        self.radek7.pack(side=ctk.LEFT, padx=10)
+        #self.radekb = ctk.CTkButton(self.klavenice_radek,text="",width=btnSize,height=btnSize,command=lambda: self.addToScreen("DONOTPRESS"))
+        #self.radekb.pack(side=ctk.LEFT, padx=10)
 
-        self.radek8 = ctk.CTkButton(
-            self.klavenice_radek,
-            text="8",
-            width=btnSize,
-            height=btnSize,
-            command=lambda: self.addToScreen("8")
-        )
-        self.radek8.pack(side=ctk.LEFT, padx=10)
+        self.radek0 = ctk.CTkButton(self.klavenice_radek,text="0",width=btnSize,height=btnSize,command=lambda: self.addToScreen("0"))
+        self.radek0.pack(side=ctk.LEFT, padx=10)
 
-        self.radek9 = ctk.CTkButton(
-            self.klavenice_radek,
-            text="9",
-            width=btnSize,
-            height=btnSize,
-            command=lambda: self.addToScreen("9")
-        )
-        self.radek9.pack(side=ctk.LEFT, padx=10)
+        self.radek_carka = ctk.CTkButton(self.klavenice_radek,text=".",width=btnSize,height=btnSize,command=lambda: self.addToScreen("."))
+        self.radek_carka.pack(side=ctk.LEFT, padx=10)
+
+        self.radek_konec = ctk.CTkButton(self.klavenice_radek,text="=",width=2*btnSize+24,height=btnSize,command=lambda: self.enter())
+        self.radek_konec.pack(side=ctk.LEFT, padx=10)
+
         self.klavenice_radek = ctk.CTkFrame(self.klavenice, fg_color="transparent", corner_radius=0)
         self.klavenice_radek.pack(side=ctk.TOP, pady=12)
 
     
-
     def addToScreen(self, message):
+        
         current = self.radek.cget("text")
+        if self.enterclear:
+            current=""
+            self.enterclear=False
         self.radek.configure(text=current + message)
     
     def clearScreen(self):
@@ -151,6 +145,20 @@ class Main(ctk.CTk):
     def deleteScreen(self):
         current = self.radek.cget("text")
         self.radek.configure(text=current[:-1])
+
+    def enter(self):
+        
+        print("get it")
+        try:
+            res=eval(self.radek.cget("text").replace("^","**").replace("√(", "abs(cmath.sqrt"))
+            if res==int(res):
+                res=int(res)
+            self.radek.configure(text=str(res))
+        except:
+            self.radek.configure(text="SYNTAX Error")
+            self.enterclear=True
+            
+        
 
 
 
