@@ -10,7 +10,7 @@ class Main(ctk.CTk):
         self.title("kalkulacka")
         self.geometry("350x550")
         self.minsize(350,550)
-        self.maxsize(350,550)
+        self.maxsize(500,550)
 
         self.generate_layout()
         self.generate_rows()
@@ -123,11 +123,12 @@ class Main(ctk.CTk):
         self.radek_carka = ctk.CTkButton(self.klavenice_radek,text=".",width=btnSize,height=btnSize,command=lambda: self.addToScreen("."))
         self.radek_carka.pack(side=ctk.LEFT, padx=10, expand=True, fill=ctk.BOTH)
 
-        self.radek_konec = ctk.CTkButton(self.klavenice_radek,text="=",width=2*btnSize+40,height=btnSize,command=lambda: self.enter())
+        self.radek_neg  = ctk.CTkButton(self.klavenice_radek,text="+/-",width=btnSize,height=btnSize,command=lambda: self.negation())
+        self.radek_neg.pack(side=ctk.LEFT, padx=10, expand=True, fill=ctk.BOTH)
+
+        self.radek_konec = ctk.CTkButton(self.klavenice_radek,text="=",width=btnSize,height=btnSize,command=lambda: self.enter())
         self.radek_konec.pack(side=ctk.LEFT, padx=10, expand=True, fill=ctk.BOTH)
 
-        # self.radekb = ctk.CTkButton(self.klavenice_radek,text="=",width=btnSize,height=btnSize,command=lambda: self.enter())
-        # self.radekb.pack(side=ctk.LEFT, padx=10, expand=True, fill=ctk.BOTH)
 
         self.klavenice_radek = ctk.CTkFrame(self.klavenice, fg_color="transparent", corner_radius=0)
         self.klavenice_radek.pack(side=ctk.TOP, pady=12, expand=True, fill=ctk.BOTH)
@@ -159,6 +160,18 @@ class Main(ctk.CTk):
         except:
             self.radek.configure(text="SYNTAX Error")
             self.enterclear=True
+    
+    def negation(self):
+        texts=self.radek.cget("text")
+        print(texts[0])
+        texts=list(texts)
+        if texts[0]=="-":
+            texts.pop(0)
+        else:
+            texts.insert(0,"-")
+        ress="".join(texts)
+        self.radek.configure(text=ress)
+        
             
         
 
